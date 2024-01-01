@@ -48,6 +48,13 @@
                         </n-input>
                     </div>
                 </div>
+                <div class="auth-btn">
+                    <span>
+                        {{ authText }}
+                    </span>
+                </div>
+                <div class="auth-text">
+                </div>
             </div>
         </div>
     </div>
@@ -71,6 +78,9 @@ let intervalID = null;
 // 顶部login/register切换
 let isRight = ref(false)
 let isSiginSwell = ref('login')
+
+// 登录按钮显示文字
+let authText = ref("Login")
 
 // 鼠标悬浮
 let handleMouseOver = (event)=>{
@@ -96,7 +106,13 @@ let handleMouseOut = (event) => {
     }
 }
 
+
+// login-register selector
+let authChange = () => {
+    
+}
    
+// 首页文字动画
 let toggleText = () =>{
     const currentText = texts.value[animatedTextIndex.value];
     const length = animatedText.value.length;
@@ -339,6 +355,99 @@ onMounted(()=>{
         text-align: center;
         line-height: 50px;
     }
+
+
+    .auth-btn{
+        /* color: #8fe4c7; */
+        background-color: #4dccc6;
+        background-image: linear-gradient(315deg,#4dccc6 0%,#96e4df 74%);
+        line-height: 42px;
+        padding:0;
+        border:none;
+        border-radius: 10px;
+        width: 40%;
+        height: 7%;
+        color: #fff;
+        font-family: 'Lato',sans-serif;
+        background-color: transparent;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        display: inline-block;
+        box-shadow: inset 2px 2px 2px 0px rgba(255,255,255,.5),
+            7px 7px 20px 0px rgba(0,0,0,.1),
+            4px 4px 5px 0px rgba(0, 0, 0, .1);
+        outline: none;
+        align-items: center;
+        justify-content: center;
+        display: flex;;
+    }
+    .auth-btn:hover{
+        background-color: #89d8d3;
+        background-image: linear-gradient(315deg,#89d8d3 0%,#03c8a8 74%);
+    }
+    .auth-btn span {
+        position: relative;
+        display: flex;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+    }
+    .auth-btn:before,
+    .auth-btn:after {
+        position: absolute;
+        content: "";
+        right: 0;
+        top: 0;
+        box-shadow:  4px 4px 6px 0 rgba(255,255,255,.9),
+                    -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+            inset -4px -4px 6px 0 rgba(255,255,255,.9),
+            inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+        transition: all 0.3s ease;
+    }
+    .auth-btn:before {
+        height: 0%;
+        width: .1px;
+    }
+    .auth-btn:after {
+        width: 0%;
+        height: .1px;
+    }
+    .auth-btn:hover:before {
+        height: 100%;
+    }
+    .auth-btn:hover:after {
+        width: 100%;
+    }
+    .auth-btn span:before,
+    .auth-btn span:after {
+        position: absolute;
+        content: "";
+        left: 0;
+        bottom: 0;
+        box-shadow:  4px 4px 6px 0 rgba(255,255,255,.9),
+                    -4px -4px 6px 0 rgba(116, 125, 136, .2), 
+            inset -4px -4px 6px 0 rgba(255,255,255,.9),
+            inset 4px 4px 6px 0 rgba(116, 125, 136, .3);
+        transition: all 0.3s ease;
+    }
+    .auth-btn span:before {
+        width: .1px;
+        height: 0%;
+    }
+    .auth-btn span:after {
+        width: 0%;
+        height: .1px;
+    }
+    .auth-btn span:hover:before {
+        height: 100%;
+    }
+    .auth-btn span:hover:after {
+       width: 100%;
+    }
+
 }
 
 
