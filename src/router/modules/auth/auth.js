@@ -5,7 +5,7 @@ import RegisterView from '@/views/auth/register.vue'
 export default {
     path: '/user',
     name: 'user',
-    redirect: '/user/register',
+    redirect: '/user/login',
     component: ()=>import('@/views/common/layout.vue'),
     children:[
         {

@@ -1,6 +1,6 @@
 <script setup>
 import { provide,ref,computed } from 'vue'
-// import {}
+import '@icon-park/vue-next/styles/index.css'
 import {
   NNotificationProvider,
   NMessageProvider,
@@ -11,20 +11,27 @@ import {
   darkTheme,
   NLayoutContent
 } from 'naive-ui'
+import {MessageApi} from '@/components/common'
 
 </script>
 
 <template>
- <div class="wrapper">
-  <div class="content">
-    <RouterView></RouterView>
-  </div>
-  <!-- <div class="footer">
-    <div>
-      Copyright © 2023 Malyue Coding
+  <n-config-provider >
+<!--    <n-message-provider>-->
+<!--      <message-api />-->
+
+    <div class="wrapper">
+      <div class="content">
+        <RouterView></RouterView>
+      </div>
+      <!-- <div class="footer">
+        <div>
+          Copyright © 2023 Malyue Coding
+        </div>
+      </div> -->
     </div>
-  </div> -->
- </div>
+<!--  </n-message-provider>-->
+</n-config-provider>
 </template>
 
 <style scoped>
@@ -36,7 +43,7 @@ import {
 }
 
 .content{
-  flex:1,
+  flex:1;
 }
 
 .footer{

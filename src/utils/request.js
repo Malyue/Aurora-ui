@@ -1,11 +1,10 @@
 import axios from 'axios'
-import { error } from 'console'
-import { isGeneratorFunction } from 'util/types'
+import { delAccessToken, getAccessToken } from '@/utils/auth'
 
 
 // create axios instance
 const request = axios.create({
-    baseURL: import.meta.env.VITE_BASE_API,
+    baseURL: import.meta.env.VITE_BASE_URL,
     timeout:10000,
 })
 
@@ -20,15 +19,20 @@ const errorHandler = (error) => {
     // 判断是否是响应错误信息
     if (error.response) {
         if (error.response.status == 401) {
-            window['$dialog'].info({
-                title:'友情提示',
-                content: '当前登录已失效，请重新登录',
-                positiveText:'立即登录',
-                maskCloseable:false,
-                onPositiveClick: () => {
-                    location.reload()
-                }
-            })
+            delAccessToken()
+
+            if (!once) {
+                once = true
+                window['$dialog'].info({
+                    title: '友情提示',
+                    content: '当前登录已失效，请重新登录？',
+                    positiveText: '立即登录?',
+                    maskClosable: false,
+                    onPositiveClick: () => {
+                        location.reload()
+                    }
+                })
+            }
         }
     }
 

@@ -2,11 +2,21 @@ import { defineConfig } from 'vite'
 import { resolve } from 'path'
 import vue from '@vitejs/plugin-vue'
 import { fileURLToPath } from 'url'
+// import AutoImport from 'unplugin-auto-import/vite'
+// import Components from 'unplugin-vue-components/vite'
+// import { ElementPlusResolver } from 'unplugin-vue-components/resolver'
 
 // https://vitejs.dev/config/
 export default defineConfig({
   base: './',
-  plugins: [vue()],
+  plugins: [vue(),
+  // AutoImport({
+  //   resolvers:[ElementPlusResolver()]
+  // }),
+  // Components({
+  //   resolvers:[ElementPlusResolver()],
+  // })
+  ],
   resolve:{
     alias:{
       // '@':resolve(__dirname,'src'),
@@ -26,6 +36,9 @@ export default defineConfig({
     cors: true,
     // 自定义代理规则
     proxy: {},
+  },
+  define: {
+    'process.env':{}
   },
 
   // 打包相关配置
