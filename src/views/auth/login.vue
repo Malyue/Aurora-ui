@@ -30,7 +30,7 @@
                 <div class="login-form">
                     <div class="label account-label">Account</div>
                     <div class="account-input input">
-                        <n-input class="coverParent n-input" type="text" placeholder="Please input your account" clearable >
+                        <n-input v-model:value="model.account" class="coverParent n-input" type="text" placeholder="Please input your account" clearable >
                             <template #clear-icon>
                                 <n-icon :component="TrashBinOutline" />
                             </template>
@@ -44,11 +44,12 @@
                             placeholder="Input Password"
                             :maxlength="15"
                             class="coverParent n-input"
+                            v-model:value="model.password"
                         >
                         </n-input>
                     </div>
                 </div>
-                <div class="auth-btn">
+                <div class="auth-btn" @click="login">
                     <span>
                         {{ authText }}
                     </span>
@@ -61,8 +62,9 @@
 </template>
 
 <script setup>
-import { onMounted,ref } from 'vue';
+import { onMounted,ref,reactive } from 'vue';
 import { TrashBinOutline } from '@vicons/ionicons5'
+import {LoginApi} from '@/api/auth'
 import { useRouter } from 'vue-router';
 
 
@@ -83,6 +85,11 @@ let isSiginSwell = ref('login')
 
 // 登录按钮显示文字
 let authText = ref("Login")
+
+let model = reactive({
+  account: '',
+  password:'',
+})
 
 // 鼠标悬浮
 let handleMouseOver = (event)=>{
@@ -115,7 +122,6 @@ let registerChange = () => {
 }
 
 let loginChange = () => {
-   
     // console.log("login")
     // if (isSiginSwell.value == 'login') {
     //     return
@@ -123,6 +129,23 @@ let loginChange = () => {
     // isSiginSwell.value = 'login'
     // isRight.value = false
     // authText.value = 'login'
+}
+
+let login = () => {
+  console.log(model)
+  if(model.account === "") {
+    window['$message'].warning('The account is invalid')
+    return
+  }
+  if (model.password === ""){
+    window['$message'].warning('The password is invalid')
+    return
+  }
+
+  let response = LoginApi({
+    account: model.account,
+    password:model.password,
+  })
 }
    
 // 首页文字动画

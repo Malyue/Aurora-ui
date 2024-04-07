@@ -2,10 +2,12 @@ import { createRouter, createWebHistory } from 'vue-router';
 // import baseRouters from './modules/base/base';
 // import base from './modules/base/base';
 import userRouters from '@/router/modules/auth/auth'
+import chatRouters from '@/router/modules/chat/chat'
 
 
 const routes = [
     userRouters,
+    chatRouters,
 ]
 
 const getHistoryMode = () => {
