@@ -85,6 +85,7 @@ let selectFunction = (path)=>{
     flex-direction: column;
     align-items: center;
     background-color: #ffffff;
+    //background-color: #151728;
     .user-image{
       display: flex;
       width: 70px;

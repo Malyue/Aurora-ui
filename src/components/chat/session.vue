@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { onMounted,ref,reactive } from "vue";
+import {onMounted, ref, reactive, watchEffect} from "vue";
 
 const props = defineProps({
   username:String,
@@ -38,6 +38,14 @@ let userInfo = reactive({
   content:props.content||'',
   type:props.type||'text',
   time:props.time||'',
+})
+
+watchEffect(()=>{
+  userInfo.name = props.username;
+  userInfo.userAvatarUrl = props.userAvatarUrl;
+  userInfo.content = props.content||'';
+  userInfo.type = props.type||'text';
+  userInfo.time = props.time||'';
 })
 
 // 如果内容为空，则不展示内容和时间，需要改变样式
@@ -66,6 +74,7 @@ let userInfo = reactive({
     border-radius: 50%;
   }
   .session-right{
+    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
