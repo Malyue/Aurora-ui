@@ -66,6 +66,7 @@ import { onMounted,ref,reactive } from 'vue';
 import { TrashBinOutline } from '@vicons/ionicons5'
 import {LoginApi} from '@/api/auth'
 import { useRouter } from 'vue-router';
+import {setAccessToken,setRefreshToken,getAccessToken} from '@/utils/auth.js';
 
 
 const texts = ref(["Chat","Video"]);
@@ -132,7 +133,6 @@ let loginChange = () => {
 }
 
 let login = () => {
-  console.log(model)
   if(model.account === "") {
     window['$message'].warning('The account is invalid')
     return
@@ -146,6 +146,21 @@ let login = () => {
     account: model.account,
     password:model.password,
   })
+
+  response.then(async (res) => {
+    if (res.code === 200) {
+      window['$message'].success('登陆成功')
+      console.log(res)
+      // TODO setToken
+      setAccessToken(res.data.accessToken)
+      setRefreshToken(res.data.refreshToken)
+      // storage user info
+      router.push("/chat/contact")
+    }else{
+      // console.log(res);
+      window['$message'].warning(res.msg);
+    }
+  })
 }
    
 // 首页文字动画
@@ -154,7 +169,7 @@ let toggleText = () =>{
     const length = animatedText.value.length;
 
     // 长度一致时，会暂停2s,可以看到完整的文字
-    if (currentText.length == length) {
+    if (currentText.length === length) {
         clearInterval(intervalID);
         setTimeout(()=>{
              // 减少一个文字
@@ -186,6 +201,10 @@ onMounted(()=>{
     intervalID = setInterval(()=>{
         toggleText();
     },300)
+  // 如果存在token，则直接跳过
+  if (getAccessToken() !== ''){
+    router.push('/chat/contact')
+  }
 })
 
 </script>

@@ -55,13 +55,27 @@ import { onMounted,ref,reactive } from "vue";
 import Session from '@/components/chat/session.vue';
 import FunctionList from '@/components/chat/function-list.vue'
 import TextMessage from '@/components/chat/textMessage.vue'
+import  {getAccessToken} from '@/utils/auth.js'
+import {GetUserInfoApi} from "@/api/user.js";
 
 const router = useRouter();
 
 onMounted(()=>{
+  // TODO 判断token是否存在，不存在则返回原来页面
+
   // 从缓存加载会话列表
   // 如果是今天的，则显示时间，反之则显示日期
+  GetUserInfo()
 })
+
+let GetUserInfo = ()=>{
+  let token = getAccessToken()
+  // 根据token去查找
+  let response = GetUserInfoApi(token)
+  response.then(async (res) => {
+    console.log(res)
+  })
+}
 
 let topMsg = ref("我的消息")
 
@@ -111,8 +125,6 @@ let msgList = reactive([{
   mineSrc:'',
   sendTime: '2023/01/03 10:50:00',
 }])
-
-
 
 
 </script>

@@ -59,7 +59,7 @@ request.interceptors.response.use((response) => response.data,errorHandler)
  * @param {String} url
  * @param {Object} data
  * @param {Object} options
- * @returns {PROmise<any>}
+ * @returns {Promise<any>}
  */
 export const get = (url,data = {},options = {}) => {
     return request({

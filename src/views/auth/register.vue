@@ -55,12 +55,12 @@ let navigateToLogin = () => {
 }
 
 let register = () => {
-  if(model.account == "") {
+  if(model.account === "") {
     // message.error("The account is invalid")
     window['$message'].warning('The account is invalid')
     return
   }
-  if (model.password == ""){
+  if (model.password === ""){
     // message.error("The password is invalid")
     window['$message'].warning('The password is invalid')
     return
@@ -72,12 +72,12 @@ let register = () => {
   })
 
   response.then((res) => {
-    if (res.code == 200) {
-      window['$message'].success('注册成功')
+    if (res.code === 200) {
+      window['$message'].success('注册成功,将跳转到登录页面')
 
       setTimeout(()=>{
-        router.push('/auth/login')
-      },500)
+        router.push('/user/login')
+      },1500)
     }else{
       window['$message'].warn('注册失败：',res.msg)
     }
